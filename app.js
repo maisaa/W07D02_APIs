@@ -60,6 +60,26 @@ app.delete('/delete/todo/:name', (req,res)=>{
     }
 } )
 
+//completed todo
+app.put('/complete/todo/:name', (req,res)=>{
+    let index;
+    const todo = req.params.name;
+    const found = todos.find((ele,i)=>{
+        index = i;
+        return ele.todo === todo;
+    });
+    if(found){
+        todos[index].isCompleted = "true";
+        res.status(200);
+        res.json(todos);
+    } else {
+        res.status(404);
+        res.json("todo not found ")
+    }
+});
+
+//
+
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
 })
