@@ -45,9 +45,19 @@ app.post('/create/user',(req,res)=>{
 });
 
 //get first-user
+app.get('/first-user',(req,res)=>{
+    res.status(200);
+    res.json(users[0]);
+})
 
+// get home
+app.get('/', (req,res)=>{
+    res.status(200);
+    res.json("hello world")
+})
 
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
+    
 })
