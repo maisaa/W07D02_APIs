@@ -69,7 +69,7 @@ app.put('/complete/todo/:name', (req,res)=>{
         return ele.todo === todo;
     });
     if(found){
-        todos[index].isCompleted = "true";
+        todos[index].isCompleted = true;
         res.status(200);
         res.json(todos);
     } else {
@@ -78,7 +78,19 @@ app.put('/complete/todo/:name', (req,res)=>{
     }
 });
 
-//
+//get all the completed todos
+app.get('/completed/todos', (req,res)=>{
+    const found = todos.filter((ele,i)=>{
+        return ele.isCompleted === true;
+    })
+    if(found.length > 0){
+        res.status(200);
+        res.json(found);
+    } else {
+        res.status(404);
+        res.json("Nothing is completed yet");
+    }
+});
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
